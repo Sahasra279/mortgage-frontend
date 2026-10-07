@@ -1,0 +1,659 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>MortgageChain | INNOBLOCK 2.0</title>
+
+  <meta
+    name="description"
+    content="Blockchain-based Mortgage Management System on Ethereum Sepolia."
+  />
+
+  <meta name="theme-color" content="#07111f" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+
+    <div class="container">
+
+      <nav class="topbar">
+
+        <div class="brand">
+
+          <span class="brand-mark">
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2.5 4 6v5.5c0 4.7 3.2 8.6 8 10 4.8-1.4 8-5.3 8-10V6l-8-3.5Z" />
+              <path d="M8 12h8" />
+              <path d="M12 8v8" />
+            </svg>
+          </span>
+
+          <div>
+            <div class="brand-name">MortgageChain</div>
+            <div class="brand-tag">INNOBLOCK 2.0</div>
+          </div>
+
+        </div>
+
+        <div class="topbar-status">
+
+          <span id="network-badge" class="network-badge">
+            Ethereum Sepolia
+          </span>
+
+          <span class="live-status">
+            <span class="status-dot"></span>
+            Blockchain Connected
+          </span>
+
+        </div>
+
+      </nav>
+
+      <!-- Hero -->
+
+      <section class="hero">
+
+        <p class="eyebrow">
+          BLOCKCHAIN MORTGAGE MANAGEMENT
+        </p>
+
+        <h1 class="hero-title">
+          Manage your mortgage.
+          <span class="gradient-text">On-chain.</span>
+        </h1>
+
+        <p class="hero-text">
+          Create mortgage loans, calculate EMI, track outstanding balances,
+          and record payments using a Solidity smart contract deployed on
+          Ethereum Sepolia.
+        </p>
+
+        <div class="hero-points">
+
+          <span>✓ Smart Contract</span>
+          <span>✓ Transparent Loan State</span>
+          <span>✓ Blockchain Payments</span>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </header>
+
+
+  <!-- Main -->
+
+  <main class="container main">
+
+    <!-- Setup warning -->
+
+    <div
+      id="setup-warning"
+      class="setup-warning"
+      role="alert"
+    ></div>
+
+
+    <!-- Wallet -->
+
+    <section class="card wallet-card">
+
+      <div class="wallet-intro">
+
+        <div class="section-label">
+          WALLET
+        </div>
+
+        <h2 class="card-title">
+          Connect Your Wallet
+        </h2>
+
+        <p class="card-desc">
+          Connect MetaMask to interact with the Mortgage smart contract.
+        </p>
+
+       <button id="connect-wallet">Connect MetaMask</button>
+<p id="wallet-status">Wallet not connected</p>
+      </div>
+
+
+      <div class="wallet-info">
+
+        <div class="info-tile">
+
+          <span class="info-label">
+            WALLET ADDRESS
+          </span>
+
+          <span
+            id="wallet-address"
+            class="info-value mono"
+          >
+            Not connected
+          </span>
+
+        </div>
+
+
+        <div class="info-tile">
+
+          <span class="info-label">
+            SEPOLIA BALANCE
+          </span>
+
+          <span
+            id="wallet-balance"
+            class="info-value mono"
+          >
+            —
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Create Loan + EMI -->
+
+    <div class="grid-two">
+
+
+      <!-- Create Loan -->
+
+      <section class="card">
+
+        <div class="card-head">
+
+          <span class="step-badge">
+            01
+          </span>
+
+          <div>
+
+            <h2 class="card-title">
+              Create Mortgage Loan
+            </h2>
+
+            <p class="card-desc">
+              Enter the loan details and create a new mortgage record
+              directly on the blockchain.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label
+              for="principal"
+              class="label"
+            >
+              Principal Amount
+            </label>
+
+            <input
+              id="principal"
+              class="input"
+              type="number"
+              min="1"
+              placeholder="Example: 500000"
+            />
+
+            <small class="field-help">
+              Enter the loan principal.
+            </small>
+
+          </div>
+
+
+          <div class="field">
+
+            <label
+              for="interest-rate"
+              class="label"
+            >
+              Annual Interest Rate (%)
+            </label>
+
+            <input
+              id="interest-rate"
+              class="input"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="Example: 8"
+            />
+
+            <small class="field-help">
+              Example: 8 means 8% annual interest.
+            </small>
+
+          </div>
+
+
+          <div class="field">
+
+            <label
+              for="tenure"
+              class="label"
+            >
+              Tenure (Months)
+            </label>
+
+            <input
+              id="tenure"
+              class="input"
+              type="number"
+              min="1"
+              placeholder="Example: 12"
+            />
+
+            <small class="field-help">
+              Loan repayment duration.
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="action-row">
+
+          <button
+            id="calculate-btn"
+            class="btn btn-secondary"
+            type="button"
+          >
+            Calculate EMI
+          </button>
+
+          <button
+            id="create-loan-btn"
+            class="btn btn-primary"
+            type="button"
+          >
+            Create Loan
+          </button>
+
+        </div>
+
+
+        <div
+          id="emi-result"
+          class="emi-result"
+        >
+          EMI will appear here
+        </div>
+
+
+        <p
+          id="loan-status"
+          class="status-text"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+      </section>
+
+
+      <!-- How it works -->
+
+      <section class="card info-card">
+
+        <div class="section-label">
+          SMART CONTRACT
+        </div>
+
+        <h2 class="card-title">
+          How It Works
+        </h2>
+
+        <p class="card-desc">
+          Every mortgage is stored as a structured loan record inside
+          the Solidity smart contract.
+        </p>
+
+
+        <div class="process-list">
+
+          <div class="process-item">
+
+            <span class="process-number">
+              1
+            </span>
+
+            <div>
+
+              <strong>
+                Create Loan
+              </strong>
+
+              <p>
+                Loan details are written to the blockchain.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <span class="process-number">
+              2
+            </span>
+
+            <div>
+
+              <strong>
+                Calculate EMI
+              </strong>
+
+              <p>
+                The smart contract calculates the monthly installment.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <span class="process-number">
+              3
+            </span>
+
+            <div>
+
+              <strong>
+                Make Payment
+              </strong>
+
+              <p>
+                Payments update the outstanding loan balance.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <span class="process-number">
+              4
+            </span>
+
+            <div>
+
+              <strong>
+                Track Status
+              </strong>
+
+              <p>
+                Outstanding balance and payment history remain transparent.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- Loans -->
+
+    <section class="card loans-card">
+
+      <div class="card-head card-head-split">
+
+        <div class="card-head-main">
+
+          <span class="step-badge">
+            02
+          </span>
+
+          <div>
+
+            <h2 class="card-title">
+              Mortgage Records
+            </h2>
+
+            <p class="card-desc">
+              View loans stored on the Ethereum Sepolia blockchain.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="refresh-btn"
+          class="btn btn-secondary"
+          type="button"
+        >
+          Refresh Loans
+        </button>
+
+      </div>
+
+
+      <div
+        id="loans"
+        class="loans"
+        role="region"
+        aria-live="polite"
+      >
+
+        <div class="empty-state">
+          Connect your wallet or refresh to load mortgage records.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Payment -->
+
+    <section class="card payment-card">
+
+      <div class="card-head">
+
+        <span class="step-badge">
+          03
+        </span>
+
+        <div>
+
+          <h2 class="card-title">
+            Make Mortgage Payment
+          </h2>
+
+          <p class="card-desc">
+            Select a loan and record its next EMI payment through MetaMask.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="payment-info">
+
+        <div>
+
+          <span class="info-label">
+            PAYMENT METHOD
+          </span>
+
+          <strong>
+            Blockchain Transaction
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span class="info-label">
+            NETWORK
+          </span>
+
+          <strong>
+            Ethereum Sepolia
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <p
+        id="payment-status"
+        class="status-text"
+        role="status"
+        aria-live="polite"
+      ></p>
+
+    </section>
+    <section class="card">
+    <h2>Payment History</h2>
+    <div id="payment-history">
+        Loading payment history...
+    </div>
+</section>
+
+
+    <!-- Contract information -->
+
+    <section class="card contract-card">
+
+      <div class="section-label">
+        DEPLOYMENT
+      </div>
+
+      <h2 class="card-title">
+        Smart Contract
+      </h2>
+
+      <div class="contract-details">
+
+        <div>
+
+          <span class="info-label">
+            NETWORK
+          </span>
+
+          <span class="mono">
+            Ethereum Sepolia
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <span class="info-label">
+            CONTRACT ADDRESS
+          </span>
+
+          <span class="mono contract-address">
+            0xd5acEdC1241b6f0001310d4c25Ad56d9513e1A0c
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Footer -->
+
+  <footer class="site-footer">
+
+    <div class="container footer-inner">
+
+      <div>
+
+        <p class="footer-brand">
+          MortgageChain
+        </p>
+
+        <p class="footer-text">
+          Blockchain-based Mortgage Management System
+        </p>
+
+      </div>
+
+      <p class="footer-built">
+        Built for INNOBLOCK 2.0
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- Ethers.js -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@6.17.0/dist/ethers.umd.min.js"
+  ></script>
+
+  <script src="config.js"></script>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
